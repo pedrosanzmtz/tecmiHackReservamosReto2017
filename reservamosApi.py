@@ -6,12 +6,12 @@ def getPlaces(city, size=10):
 	r = requests.get(url)
 	json = r.json()
 	final = json[:size]
-	pprint(final)
+	return final
 
-def getQuotes(origin, destination, start, finish, size=5):
+def getQuotes(data, size=5):
 	# p = getPopularity(origin, destination)
-	url = 'https://www.reservamos.mx/api/v2/quotes?origin='+origin+ '&' \
-			'&destination='+destination+'&start='+start+'&finish='+finish
+	url = 'https://www.reservamos.mx/api/v2/quotes?origin='+data['origin']+ '&' \
+			'&destination='+data['destination']+'&start='+data['start']+'&finish='+data['finish']
 	
 	r = requests.get(url)
 	json = r.json()
@@ -30,8 +30,7 @@ def getQuotes(origin, destination, start, finish, size=5):
 			results.append(result)
 	results = sorted(results, key=lambda x: x['score'])
 	results = results[:size]
-	for i in results:
-		print(i)
+	return results
 
 def getPopularity(city, to):
 	url = 'https://www.reservamos.mx/api/v2/places.json?from=' + city + '&prefetch=true'
@@ -46,7 +45,7 @@ def getPopularity(city, to):
 
 if __name__ == '__main__':
 	city = 'guadalajara'
-	getPlaces(city)
+	# getPlaces(city)
 	origin = 'ciudad-de-mexico'
 	destination = 'monterrey'
 	start = '01-11-2017'
