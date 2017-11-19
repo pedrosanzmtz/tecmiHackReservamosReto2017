@@ -1,3 +1,4 @@
+from __future__ import division
 import requests
 
 def getPlaces(city, size=10):
@@ -19,7 +20,7 @@ def getQuotes(data, size=5):
 	for i in json:
 		for j in i:
 			result = dict()
-			j["score"] = (p * j["duration"]) * j["price"]
+			j["score"] = j["price"] /j["duration"]
 			result["score"] = j["score"]
 			result["price"] = j["price"]
 			result["duration"] = j["duration"]
