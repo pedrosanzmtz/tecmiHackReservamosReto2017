@@ -1,5 +1,4 @@
 import requests
-from pprint import pprint
 
 def getPlaces(city, size=10):
 	url = 'https://www.reservamos.mx/api/v2/places.json?from=' + city + '&prefetch=true'
@@ -9,7 +8,6 @@ def getPlaces(city, size=10):
 	return final
 
 def getQuotes(data, size=5):
-	# p = getPopularity(origin, destination)
 	url = 'https://www.reservamos.mx/api/v2/quotes?origin='+data['origin']+ '&' \
 			'&destination='+data['destination']+'&start='+data['start']+'&finish='+data['finish']
 	
@@ -42,13 +40,3 @@ def getPopularity(city, to):
 			p = float(i['popularity'])
 			break
 	return p
-
-if __name__ == '__main__':
-	city = 'guadalajara'
-	# getPlaces(city)
-	origin = 'ciudad-de-mexico'
-	destination = 'monterrey'
-	start = '01-11-2017'
-	finish = '31-03-2018'
-	# getQuotes(origin, destination, start, finish)
-	# getPopularity(origin, destination)
