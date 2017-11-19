@@ -5,19 +5,15 @@ app = Flask(__name__)
 
 @app.route('/places', methods=['POST'])
 def places():
-	city = request.args.get('city')	
-	response_dict = reservamosApi.getPlaces(city)
+	data = json.loads(request.data)	
+	response_dict = reservamosApi.getPlaces(data['city'])
 	response_json = json.dumps(response_dict)
 	response = Response(response=response_json, status=200, mimetype="application/json")
 	return response
 
 @app.route('/quotes', methods=['POST'])
 def quotes():
-	data = dict()
-	data['origin'] = request.args.get('origin')
-	data['destination'] = request.args.get('destination')
-	data['start'] = request.args.get('start')
-	data['finish'] = request.args.get('finish')
+	data = json.loads(request.data)
 	response_dict = reservamosApi.getQuotes(data)
 	response_json = json.dumps(response_dict)
 	response = Response(response=response_json, status=200, mimetype="application/json")
